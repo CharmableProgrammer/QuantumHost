@@ -1,0 +1,153 @@
+.dashboard {
+    padding: 2rem;
+}
+
+.dashboard h1 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 2rem;
+}
+
+.overview {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.stat {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+    flex: 1;
+    margin: 0 1rem;
+}
+
+.stat h3 {
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    margin-bottom: 0.5rem;
+}
+
+.stat p {
+    font-size: 2rem;
+    color: #3498db;
+    font-weight: bold;
+}
+
+.serverList h2 {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.serverCard {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.serverInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.serverInfo h3 {
+    font-size: 1.5rem;
+    color: #2c3e50
+}
+
+.statusOnline {
+    color: #2ecc71;
+    font-weight: bold;
+}
+
+.statusOffline {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.serverResources {
+    margin-bottom: 1rem;
+}
+
+.resource {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.resource label {
+    width: 60px;
+    color: #7f8c8d
+}
+
+.progressBar {
+    flex-grow: 1;
+    height: 10px;
+    background-color: #ecf0f1;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 0 1rem;
+}
+
+.progressFill {
+    height : 100%;
+    background-color: #3498db;
+}
+
+.resource span {
+    width: 40px;
+    text-align: right; 
+    color: #34495e;
+}
+
+.serverActions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.serverActions button {
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.serverActions button:hover {
+    background-color: #2980b9;
+  }
+
+.serverActions button:active{
+    transform: scale(0.98);
+}
+  
+  @media (max-width: 768px) {
+    .overview {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  
+    .stat {
+      margin: 0 0 1rem 0;
+      width: 100%;
+    }
+  
+    .serverActions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .serverActions button {
+      margin: 0.5rem 0;
+      width: 100%;
+    }
+  }

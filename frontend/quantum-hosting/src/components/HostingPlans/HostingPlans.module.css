@@ -1,0 +1,115 @@
+.hostingPlans {
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.hostingPlans h1 {
+    font-size: 2.5rem;
+    color: #7f8c8d;
+    margin-bottom: 3rem;
+}
+
+.planCards {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.planCard {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px egba(0, 0, 0, 0.1);
+    padding: 2rem;
+    width: 300px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.planCard:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.recommended {
+    border: 2px solid #3498db;
+}
+
+.recommendedBadge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #3498db;
+    color: white;
+    padding: 0.25rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9;
+    font-weight: bold;
+}
+
+.planCard h2 {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.price {
+    font-size: 1.5rem;
+    color: #3498db;
+    margin-bottom: 1.5rem;
+}
+
+.currency {
+    font-size: 1.5rem;
+    vertical-align: top;
+    margin-right: 0.25rem;
+}
+    
+.amount {
+    font-weight: bold;
+}
+
+.period {
+    font-size: 1rem;
+    color: #7f8c8d;
+}
+
+.features {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 2rem;
+}
+
+.features li {
+    margin-bottom: 0.5rem;
+    color: #34495e;
+}
+
+.selectButton {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer; 
+    transition: background-color 0.3s ease;
+}
+
+.selectButton:hover {
+    background-color: #2980b9;
+}
+
+@media (max-width: 768px) {
+    .planCards {
+        flex-direction: column; 
+        align-items: center;
+    }
+
+    .planCard {
+        width: 100%;
+        max-width: 300px;
+    }
+}

@@ -1,0 +1,79 @@
+.termsFAQ {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.tabs {
+    display: flex;
+    margin-bottom: 2rem;
+}
+
+.tab {
+    flex: 1;
+    padding: 1rem;
+    font-size: 1.1rem;
+    background-color: #f8f9fa;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.tab.active {
+    background-color: #3498db;
+    color: white;
+}
+
+.terms h2, .faq h2 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.terms h3 {
+    font-size: 1.5rem;
+    color: #34495e;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.terms p {
+    color: #7f8c8d;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.faqItem {
+    margin-bottom: 1rem;
+}
+
+.faqQuestion {
+    width: 100%;
+    text-align: left;
+    padding: 1rem;
+    font-size: 1.1rem;
+    background-color: #f8f9fa;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faqIcon {
+    font-size: 1.5rem;
+    color: #3498db;
+}
+
+.faqAnswer {
+    padding: 1rem;
+    background-color: #ecf0f1;
+    color: #34495e;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .termsFAQ {
+        padding: 1rem;
+    }
+}

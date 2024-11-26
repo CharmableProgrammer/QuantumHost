@@ -1,0 +1,92 @@
+.contactAbout {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem 0;
+}
+
+.about, .contact {
+    flex: 1;
+}
+
+.about h2, .contact h2 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.about p {
+    color: #34495e;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat h3 {
+    font-size: 1.8rem;
+    color: #3498db;
+    margin-bottom: 0.5rem;
+}
+
+.stat p {
+    color: #7f8c8d;
+}
+
+.contactForm {
+    background-color: #f8f9fa;
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+.formGroup {
+    margin-bottom: 1rem;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+}
+
+.formGroup input, 
+.formGroup textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.formGroup textarea {
+    height: 150px;
+}
+
+.submitButton {
+    background-color: #3498db;
+    color: white;
+    border: none; 
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+    background-color: #2980b9;
+}
+
+@media (max-width: 768px) {
+    .contactAbout {
+        flex-direction: column;
+    }
+}

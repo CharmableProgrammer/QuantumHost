@@ -1,0 +1,117 @@
+.homeContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.heroSection {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    background-color: #f8f9fa;
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+.heroContent {
+    flex: 1;
+}
+
+.heroImage{
+    flex: 1;
+}
+
+.serverImage {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.heroContent h1 {
+    font-size: 3rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.heroContent h2 {
+    font-size: 1.5rem;
+    color: #34495e;
+    margin-bottom: 1rem;
+}
+
+.heroContent p {
+    color: #7f8c8d;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.ctaButtons {
+    display: flex;
+    gap: 1rem;
+}
+
+.btnPrimary, .btnSecondary {
+    padding: 0.75rem 1,5rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btnPrimary {
+    background-color: #3498db;
+    color: white;
+    border: 2px solid #3498db;
+}
+
+.btnPrimary:hover {
+    background-color: #2980b9;
+}
+
+.btnSecondary {
+    background-color: white;
+    color: #3498db;
+    border: 2px solid #3498db;
+}
+
+.featuresSection {
+    text-align: center;
+}
+
+.featuresSection h3 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #2c3e50;
+}
+
+.featureGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+.featureCard {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.featureCard:hover {
+    transform: translateY(-10px);
+}
+
+.featureIcon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.featureCard h4 {
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+}
+
+.featureCard p {
+    color: #7f8c8d;
+}
