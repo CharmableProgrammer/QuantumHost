@@ -1,5 +1,6 @@
 // App.js
 import React, { useState, Suspense } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import QuantumEncryption from './components/utils/QuantumEncryption';
@@ -12,6 +13,7 @@ const ContactAbout = React.lazy(() => import('./components/ContactAbout/ContactA
 const TermsFAQ = React.lazy(() => import('./components/TermsFAQ/TermsFAQ'));
 const UserDashboard = React.lazy(() => import('./components/UserDashboard/UserDashboard'));
 const UserProfile = React.lazy(() => import('./components/UserProfile/UserProfile'));
+const Notifications = React.lazy(() => import('./components/Notifications/Notifications'));
 
 
 function App() {
@@ -22,6 +24,18 @@ function App() {
     setIsEncrypted(!isEncrypted);
     // Simulate encryption/decryption of all data
     QuantumEncryption.toggleEncryption();
+  };
+
+  const pageVariants = {
+    initial: { opacity: 0, x: "100vw" },
+    in: { opacity: 1, x: 0 },
+    out: { opacity: 0, x: "100vw" }
+  };
+
+  const pageTransition = {
+    type: "tween",
+    ease: "anticipate",
+    duration: 0.5
   };
 
   const renderPage = () => {
@@ -36,7 +50,7 @@ function App() {
         return <TermsFAQ />;
       case 'dashboard':
         return <UserDashboard />;
-        case 'profile':
+      case 'profile':
         return <UserProfile />;
       default:
         return <Home navigate={setCurrentPage} />;
@@ -45,13 +59,24 @@ function App() {
 
   return (
     <div className={styles.app}>
-      <Header navigate={setCurrentPage}
-      toggleEncryption={toggleEncryption} isEncrypted={isEncrypted} />
-      <main className={styles.main}>
-        <Suspense fallback={<div>Loading...</div>}>
-          {renderPage()}
-        </Suspense>
-      </main>
+      <Header navigate={setCurrentPage} currentPage={currentPage} />
+      <Notifications />
+      <AnimatePresence mode='wait'>
+        <motion.main
+          key={currentPage}
+          initial="initial"
+          animate="in"
+          exit="out"
+          variants={pageVariants}
+          transition={pageTransition}
+          className={styles.main}
+        >
+          <Suspense fallback={<div className=
+          {styles.loader}>Loading...</div>}>
+            {renderPage()}
+          </Suspense>
+          </motion.main>
+      </AnimatePresence>
       <Footer />
     </div>
   );

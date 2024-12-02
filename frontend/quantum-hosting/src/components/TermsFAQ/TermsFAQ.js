@@ -4,6 +4,7 @@ import styles from './TermsFAQ.module.css';
 function TermsFAQ() {
     const [activeTab, setActiveTab] = useState('terms');
     const [openFAQ, setOpenFAQ] = useState(null);
+    const [openTerms, setOpenTerms] = useState(null);
 
     const faqs = [
         {
@@ -28,26 +29,56 @@ function TermsFAQ() {
         }
     ];
 
-    const toggleFAQ = (index) => {
-        if (openFAQ === index) {
-            setOpenFAQ(null);
-        } else {
-            setOpenFAQ(index);
+    const terms = [
+        {
+            title: "1. Acceptance of Terms", 
+            content: "By accessing nd using quantum Hosting services, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any part of these terms, you may not use our services."
+        },
+        {
+            title: "2. Use of Services",
+            content: "You agree to use Quantum Hosting services only for lawful purposes and in accordance with Terms of Service. You are prohibited from using the services to violate any laws or regulations. This includes, but is not limited to \n\n- Hosting illegal content\n- Engaging in unauthorized access to other systems\n- Distributing malware or viruses\n- Infringing on intellectual property rights"
+        }, 
+        {
+            title: "3. Service Availability and Performance",
+            content: "While we strive to provide 99.9% uptime, we do or error-free. We reserve the right to modify, suspend, or discontinue the services at any time without notice. In the event of planned maintenance, we will make reasonable efforts to notify you in advance."
+        }, 
+        {
+            title: "4. Payment and Refunds",
+            content: "Payment is due at the time of purchase. We offer a 7-day money-back guarantee for new accounts. Refunds after this period are at our discretion and will be prorated for unused service time. recurring payments will be automatically charged unless canceled before renewal date."
+        }, 
+        {
+            title: "5. limitation of Liability",
+            content: "quantum Hosting shall not be liable for any indirect, incidental, special, consequential or punnitive damages, including without limitation, loss of profits, data, ue, goodwill, or other intangible losses. Our total liability for any claim arising from or related to these Terms of Service shall not exceed the amount you paid to us for the applicable services in the past 12 months."
+        }, 
+        {
+            title: "6. Data Protection and Privacy", 
+            content: "We are comiited to protecting your privacy and handling your data in accordance with applicable data protection laws. Please refer to our Privace Policy for detailed information on how we collect, use, and protect your personal data."
+        }, 
+        {
+            title: "7. Intellectual Property",
+            content: "All content, features, and functionality of our services, including but not limited to text, graphics, logos, and software, are the exclusive property of Quantum Hosting and are protected by international copyright, trademark, and other intellectual property laws."
         }
+    ];
+
+    const toggleFAQ = (index) => {
+        setOpenFAQ(openFAQ === index ? null : index);
+    };
+
+    const toggleTerms = (index) => {
+        setOpenTerms(openTerms === index ? null : index);
     };
 
     return (
         <div className={styles.termsFAQ}>
             <div className={styles.tabs}>
                 <button
-                    className={`${styles.tab} ${activeTab === 'terms' ?
-                        styles.active : ''} `}
+                    className={`${styles.tab} ${activeTab === 'terms' ? styles.active : ''}`}
                     onClick={() => setActiveTab('terms')}
                 >
                     Terms of Service
                 </button>
-                <button className={`${styles.tab} ${activeTab === 'faq'
-                    ? styles.active : ''} `}
+                <button 
+                    className={`${styles.tab} ${activeTab === 'faq' ? styles.active : ''}`}
                     onClick={() => setActiveTab('faq')}
                 >
                     FAQ
@@ -57,43 +88,25 @@ function TermsFAQ() {
             {activeTab === 'terms' && (
                 <div className={styles.terms}>
                     <h2>Terms of Service</h2>
-                    <p>Last updated: November 20, 2024</p>
-                    <h3>1. Acceptance of Terms</h3>
-                    <p>By accessing and using Quantum Hosting services,
-                        you agree to be bound by these Terms of Service
-                        and all applicable laws and regulations. If you
-                        do not agree with any part of these terms, you may
-                        not use our services.</p>
-
-                    <h3>2. Use of Services</h3>
-                    <p>You agree to use Quantum Hosting services
-                        only for lawful purposes and in accordance
-                        with these Terms of Service. You are prohibited
-                        from using the services to violate any laws or
-                        regulations.</p>
-
-                    <h3>3. Service Availability and Performance</h3>
-                    <p>While we strive to provide 99.9% uptime,
-                        we do not guarantee that the services
-                        will be uninterrupted, timely, secure,
-                        or error-free. We reserve the right to
-                        modify, suspend, or discontinue the services
-                        at any time without notice.</p>
-
-                    <h3>4. Payment and Refunds</h3>
-                    <p>Payment is due at the time of purchase. We offer 
-                        a 7-day money-back guarantee for new accounts. 
-                        Refunds after this period are at our discretion 
-                        and will be prorated for unused service time.</p>
-
-                    <h3>5. Limitation of Liability</h3>
-                    <p>Quantum Hosting shall not be liable for 
-                        any indirect, incidental, special, consequential 
-                        or punitive damages, including without limitation, 
-                        loss of profits, data, use, goodwill, or other 
-                        intangible losses.</p>
-
-                        {/* more sections */}
+                    <p className={styles.lastUpdated}>Last updated: November 20, 2024</p>
+                    {terms.map((term, index) => (
+                        <div key={index} className={styles.termItem}>
+                            <button
+                                className={styles.termTitle}
+                                onClick={() => toggleTerms(index)}
+                            >
+                                {term.title}
+                                <span className={styles.termIcon}>{openTerms === index ? '−' : '+'}</span>
+                            </button>
+                            {openTerms === index && (
+                                <div className={styles.termContent}>
+                                    {term.content.split('\n').map((paragraph, i) => (
+                                        <p key={i}>{paragraph}</p>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    ))}
                 </div>
             )}
 
@@ -103,12 +116,11 @@ function TermsFAQ() {
                     {faqs.map((faq, index) => (
                         <div key={index} className={styles.faqItem}>
                             <button
-                            className={styles.faqQuestion}
-                            onClick={() => toggleFAQ(index)}
+                                className={styles.faqQuestion}
+                                onClick={() => toggleFAQ(index)}
                             >
                                 {faq.question}
-                                <span className={styles.faqIcon}>{openFAQ ===
-                                index ? '-' : '+'}</span>
+                                <span className={styles.faqIcon}>{openFAQ === index ? '−' : '+'}</span>
                             </button>
                             {openFAQ === index && (
                                 <div className={styles.faqAnswer}>

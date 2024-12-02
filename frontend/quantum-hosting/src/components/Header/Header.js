@@ -1,41 +1,38 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import styles from './Header.module.css'
 
-function Header ({ navigate, toggleEncryption, isEncrypted }) {
-
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+function Header ({ navigate, currentPage }) {
+  const navItems = [
+    { name: 'Home', key: 'home' },
+    { name: 'Hosting Plans', key: 'plans' },
+    { name: 'Contact & About', key: 'contact-about' },
+    { name: 'Terms & FAQ', key: 'terms-faq' },
+    { name: 'Dashboard', key: 'dashboard' },
+  ];
 
   return (
     <header className={styles.header}>
-      <div 
-      className={styles.logo} 
-      onClick={() => navigate('home')}
-      tabIndex={0} 
-      role='button' 
-      aria-label='Home'
+      <motion.div
+      className={styles.logo}
+      whileHover={{ scale: 1.1 }}
+      whiletap={{ scale: 0.9 }}
+      onClick={() => navigate('homme')}
       >
         Quantum Hosting
-      </div>
-      <nav className={styles.nav} aria-label="Main Navigation">
-        <button 
-        className={styles.mobileMenuButton} 
-        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        aria-label="Toggle menu">
-        ☰
-        </button>
-        <ul className={`${styles.navList} ${isMobileMenuOpen ?
-          styles.active : ''} ` }>
-          <li><button onClick={() => navigate('home')} aria-label="Home">Home</button></li>
-          <li><button onClick={() => navigate('plans')} aria-label="Hosting Plans">Hosting Plans</button></li>
-          <li><button onClick={() => navigate('contact-about')} aria-label="Contact and About">Contact & About</button></li>
-          <li><button onClick={() => navigate('terms-faq')} aria-label="Terms and FAQ">Terms & FAQ</button></li>
-          <li><button onClick={() => navigate('dashboard')} aria-label="User Dashboard">User Dashboard</button></li>
-          <li>
-            <button onClick={toggleEncryption} aria-label="Toggle Quantum Encryption">
-              {isEncrypted ? 'Disable' : 'Enable'} Quantum Encryption
-            </button>
-          </li>
-        </ul>
+      </motion.div>
+      <nav className={styles.nav}>
+        {navItems.map((item) => (
+          <motion.button 
+          key={item.key}
+          onClick={() => navigate(item.key)}
+          className={currentPage === item.key ? styles.active : ''}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          >
+            {item.name}
+          </motion.button>
+        ))}
       </nav>
     </header>
   );

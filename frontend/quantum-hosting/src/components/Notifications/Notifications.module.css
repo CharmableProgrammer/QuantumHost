@@ -1,0 +1,12 @@
+.notifications {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+}
+
+.notification {
+    background-color: #3498db;
+    color: white;
+    padding: .75rem;
+    margin-bottom: 0.5rem;
+}

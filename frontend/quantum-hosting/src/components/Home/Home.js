@@ -1,56 +1,136 @@
-// components/Home/Home.js
 import React from 'react';
+import { motion } from 'framer-motion';
 import styles from './Home.module.css';
 
 function Home({ navigate }) {
-  return (
-    <div className={styles.homeContainer}>
-      <div className={styles.heroSection}>
-        <div className={styles.heroContent}>
-          <h1>Quantum Hosting</h1>
-          <h2>Next-Level Game Server Hosting</h2>
-          <p>Experience lightning-fast, reliable game servers powered by quantum technology. Host your favorite games with unparalleled performance and security.</p>
-          
-          <div className={styles.ctaButtons}>
-            <button onClick={() => navigate('plans')} className={styles.btnPrimary}>Get Started</button>
-            <button onClick={() => navigate('plans')} className={styles.btnSecondary}>View Plans</button>
-          </div>
-        </div>
-        
-        <div className={styles.heroImage}>
-          <img 
-            src="/path-to-server-image.png" 
-            alt="Quantum Hosting Servers" 
-            className={styles.serverImage}
-          />
-        </div>
-      </div>
+  const features = [
+    {
+      icon: "🚀",
+      title: "High-Performance Servers",
+      description: "Quantum-powered hosting with lightning-fast speeds and 99.9% uptime."
+    },
+    {
+      icon: "🌐",
+      title: "Global Network",
+      description: "Servers located strategically worldwide for optimal performance."
+    },
+    {
+      icon: "🛡️",
+      title: "Advanced Security",
+      description: "Military-grade encryption and DDoS protection for your game servers."
+    }
+  ];
 
-      <div className={styles.featuresSection}>
-        <h3>Why Choose Quantum Hosting?</h3>
+  const gameTypes = [
+    "Minecraft", 
+    "Counter-Strike", 
+    "ARK", 
+    "Rust", 
+    "Valheim", 
+    "7 Days to Die"
+  ];
+
+  return (
+    <div className={styles.home}>
+      <section className={styles.hero}>
+        <motion.div 
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className={styles.heroContent}
+        >
+          <h1>Quantum Hosting: Next-Level Game Server Hosting</h1>
+          <p>Unleash the power of quantum computing for your game servers</p>
+          <div className={styles.heroButtons}>
+            <button onClick={() => navigate('plans')}>View Plans</button>
+            <button onClick={() => navigate('contact-about')}>Contact Us</button>
+          </div>
+        </motion.div>
+      </section>
+
+      <section className={styles.features}>
+        <h2>Why Choose Quantum Hosting?</h2>
         <div className={styles.featureGrid}>
-          <div className={styles.featureCard}>
-            <div className={styles.featureIcon}>🚀</div>
-            <h4>Ultra-Low Latency</h4>
-            <p>Quantum-powered servers for minimal ping</p>
-          </div>
-          <div className={styles.featureCard}>
-            <div className={styles.featureIcon}>🛡️</div>
-            <h4>DDoS Protection</h4>
-            <p>Advanced security to keep your servers safe</p>
-          </div>
-          <div className={styles.featureCard}>
-            <div className={styles.featureIcon}>⚙️</div>
-            <h4>Easy Management</h4>
-            <p>Intuitive control panel for seamless control</p>
-          </div>
-          <div className={styles.featureCard}>
-            <div className={styles.featureIcon}>🆘</div>
-            <h4>24/7 Support</h4>
-            <p>Expert help whenever you need it</p>
-          </div>
+          {features.map((feature, index) => (
+            <motion.div 
+              key={index}
+              whileHover={{ scale: 1.05 }}
+              className={styles.featureCard}
+            >
+              <span className={styles.featureIcon}>{feature.icon}</span>
+              <h3>{feature.title}</h3>
+              <p>{feature.description}</p>
+            </motion.div>
+          ))}
         </div>
-      </div>
+      </section>
+
+      <section className={styles.supportedGames}>
+        <h2>Supported Games</h2>
+        <div className={styles.gameLogos}>
+          {gameTypes.map((game, index) => (
+            <motion.div 
+              key={index}
+              whileHover={{ scale: 1.1 }}
+              className={styles.gameLogo}
+            >
+              {game}
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      <section className={styles.pricing}>
+        <h2>Quick Pricing Overview</h2>
+        <div className={styles.pricingCards}>
+          <motion.div 
+            whileHover={{ scale: 1.05 }}
+            className={styles.pricingCard}
+          >
+            <h3>Starter</h3>
+            <p className={styles.price}>$9.99/month</p>
+            <ul>
+              <li>2 GB RAM</li>
+              <li>10 Player Slots</li>
+              <li>Basic Support</li>
+            </ul>
+            <button onClick={() => navigate('plans')}>Choose Plan</button>
+          </motion.div>
+          <motion.div 
+            whileHover={{ scale: 1.05 }}
+            className={styles.pricingCard}
+          >
+            <h3>Pro</h3>
+            <p className={styles.price}>$19.99/month</p>
+            <ul>
+              <li>8 GB RAM</li>
+              <li>50 Player Slots</li>
+              <li>Priority Support</li>
+            </ul>
+            <button onClick={() => navigate('plans')}>Choose Plan</button>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className={styles.testimonials}>
+        <h2>What Our Customers Say</h2>
+        <div className={styles.testimonialGrid}>
+          <motion.div 
+            whileHover={{ scale: 1.05 }}
+            className={styles.testimonialCard}
+          >
+            <p>"Best game server hosting I've ever used!"</p>
+            <span>- John D., Minecraft Server Admin</span>
+          </motion.div>
+          <motion.div 
+            whileHover={{ scale: 1.05 }}
+            className={styles.testimonialCard}
+          >
+            <p>"Incredible performance and support."</p>
+            <span>- Sarah M., CS:GO Community Leader</span>
+          </motion.div>
+        </div>
+      </section>
     </div>
   );
 }

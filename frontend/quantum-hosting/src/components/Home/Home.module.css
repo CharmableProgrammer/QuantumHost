@@ -1,117 +1,98 @@
-.homeContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
+.home {
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.heroSection {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    background-color: #f8f9fa;
-    padding: 2rem;
-    border-radius: 10px;
-}
-
-.heroContent {
-    flex: 1;
-}
-
-.heroImage{
-    flex: 1;
-}
-
-.serverImage {
-    max-width: 100%;
-    height: auto;
+.hero {
+    background: linear-gradient(135deg, #3498db, #2c3e50);
+    color: white;
+    text-align: center;
+    padding: 4rem 2rem;
     border-radius: 10px;
 }
 
 .heroContent h1 {
-    font-size: 3rem;
-    color: #2c3e50;
-    margin-bottom: 0.5rem;
-}
-
-.heroContent h2 {
-    font-size: 1.5rem;
-    color: #34495e;
+    font-size: 2.5rem;
     margin-bottom: 1rem;
 }
 
-.heroContent p {
-    color: #7f8c8d;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-}
-
-.ctaButtons {
+.heroButtons {
     display: flex;
+    justify-content: center;
     gap: 1rem;
+    margin-top: 2rem;
 }
 
-.btnPrimary, .btnSecondary {
-    padding: 0.75rem 1,5rem;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.btnPrimary {
-    background-color: #3498db;
-    color: white;
-    border: 2px solid #3498db;
-}
-
-.btnPrimary:hover {
-    background-color: #2980b9;
-}
-
-.btnSecondary {
+.heroButtons button {
+    padding: 0.75rem 1.5rem;
     background-color: white;
-    color: #3498db;
-    border: 2px solid #3498db;
-}
-
-.featuresSection {
-    text-align: center;
-}
-
-.featuresSection h3 {
-    font-size: 2rem;
-    margin-bottom: 2rem;
     color: #2c3e50;
-}
-
-.featureGrid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-}
-
-.featureCard {
-    background-color: #f8f9fa;
-    padding: 1.5rem;
-    border-radius: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
     transition: transform 0.3s ease;
 }
 
-.featureCard:hover {
-    transform: translateY(-10px);
+.features, .supportedGames, .pricing, .testimonials {
+    margin: 4rem 0;
+    text-align: center;
 }
 
-.featureIcon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+.featureGrid {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
 }
 
-.featureCard h4 {
-    margin-bottom: 0.5rem;
-    color: #2c3e50;
+.featureCard {
+    flex: 1;
+    background-color: #f4f6f7;
+    padding: 2rem;
+    border-radius: 10px;
 }
 
-.featureCard p {
-    color: #7f8c8d;
+.gameLogos {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.gameLogo {
+    background-color: #3498db;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: 5px;
+}
+
+.pricingCards {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.pricingCard {
+    background-color: #f4f6f7;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 300px;
+}
+
+.testimonialGrid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.testimonialCard {
+    background-color: #f4f6f7;
+    padding: 1.5rem;
+    border-radius: 10px;
+    width: 400px;
+}
+
+@media (max-width: 768px) {
+    .featureGrid, .pricingCards, .testimonialGrid {
+        flex-direction: column;
+    }
 }

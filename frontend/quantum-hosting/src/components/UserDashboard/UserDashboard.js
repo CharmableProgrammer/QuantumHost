@@ -1,120 +1,128 @@
 // components/UserDashboard/UserDashboard.js
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { Line } from 'react-chartjs-2';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import styles from './UserDashboard.module.css';
-import QuantumEncryption from '../utils/QuantumEncryption';
+
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 function UserDashboard() {
+  const [darkMode, setDarkMode] = useState(false);
   const [servers, setServers] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [selectedServer, setSelectedServer] = useState(null);
+  const [usageData, setUsageData] = useState({ timestamps: [], cpu: [], ram: [] });
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    document.body.classList.toggle('dark-mode', !darkMode);
+  };
 
   useEffect(() => {
-    // Simulate fetching data with improved performance
-    const fetchData = async () => {
-      setIsLoading(true);
-      // Simulate a faster quantum-powered API call
-      await new Promise(resolve => setTimeout(resolve, 200));
+    // Simulating API call to fetch servers
+    const fetchServers = async () => {
       const data = [
-        { id: 1, name: 'Minecraft Server', status: 'Online', cpu: 45, ram: 60, storage: 30 },
-        { id: 2, name: 'CS:GO Server', status: 'Offline', cpu: 0, ram: 0, storage: 25 },
-        { id: 3, name: 'ARK Server', status: 'Online', cpu: 80, ram: 75, storage: 65 },
+        { id: 1, name: 'Minecraft Server', status: 'Online' },
+        { id: 2, name: 'CS:GO Server', status: 'Offline' },
+        { id: 3, name: 'ARK Server', status: 'Online' },
       ];
-      setServers(QuantumEncryption.encrypt(data));
-      setIsLoading(false);
+      setServers(data);
+      if (data.length > 0) setSelectedServer(data[0].id);
     };
-
-    fetchData();
+    fetchServers();
   }, []);
 
-  const toggleServerStatus = (id) => {
-    setServers(prevServers => {
-      const decryptedServers = QuantumEncryption.decrypt(prevServers);
-      const updatedServers = decryptedServers.map(server => 
-        server.id === id 
-          ? {...server, status: server.status === 'Online' ? 'Offline' : 'Online'}
-          : server
-      );
-      return QuantumEncryption.encrypt(updatedServers);
-    });
+  useEffect(() => {
+    if (selectedServer) {
+      // Simulating API call to fetch usage data
+      const fetchUsageData = async () => {
+        const data = {
+          timestamps: ['10:00', '11:00', '12:00', '13:00'],
+          cpu: [20, 30, 40, 50],
+          ram: [50, 60, 70, 80],
+        };
+        setUsageData(data);
+      };
+      fetchUsageData();
+    }
+  }, [selectedServer]);
+
+  const chartData = {
+    labels: usageData.timestamps,
+    datasets: [
+      {
+        label: 'CPU Usage',
+        data: usageData.cpu,
+        borderColor: 'rgb(75, 192, 192)',
+        tension: 0.1
+      },
+      {
+        label: 'RAM Usage',
+        data: usageData.ram,
+        borderColor: 'rgb(255, 99, 132)',
+        tension: 0.1
+      }
+    ]
   };
 
-  const allocateResources = (id, resource, amount) => {
-    setServers(prevServers => {
-      const decryptedServers = QuantumEncryption.decrypt(prevServers);
-      const updatedServers = decryptedServers.map(server => 
-        server.id === id 
-          ? {...server, [resource]: Math.min(100, server[resource] + amount)}
-          : server
-      );
-      return QuantumEncryption.encrypt(updatedServers);
-    });
+  const chartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Server Resource Usage Over Time',
+      },
+    },
   };
-
-  if (isLoading) {
-    return <div>Loading dashboard data...</div>;
-  }
-
-  const decryptedServers = QuantumEncryption.decrypt(servers);
 
   return (
-    <div className={styles.dashboard}>
-      <h1>User Dashboard</h1>
-      <div className={styles.overview}>
-        <div className={styles.stat}>
-          <h3>Total Servers</h3>
-          <p>{decryptedServers.length}</p>
-        </div>
-        <div className={styles.stat}>
-          <h3>Online Servers</h3>
-          <p>{decryptedServers.filter(server => server.status === 'Online').length}</p>
-        </div>
-        <div className={styles.stat}>
-          <h3>Storage Used</h3>
-          <p>{decryptedServers.reduce((total, server) => total + server.storage, 0)}%</p>
-        </div>
+    <div className={`${styles.dashboard} ${darkMode ? styles.dark
+      : ''}`}>
+        <button onClick={toggleDarkMode} className={styles.darkModeToggle}>
+          {darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+        </button>
+      <motion.h1 
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        User Dashboard
+      </motion.h1>
+      <div className={styles.serverSelector}>
+        <label htmlFor="serverSelect">Select Server:</label>
+        <select 
+          id="serverSelect" 
+          value={selectedServer} 
+          onChange={(e) => setSelectedServer(Number(e.target.value))}
+        >
+          {servers.map(server => (
+            <option key={server.id} value={server.id}>{server.name}</option>
+          ))}
+        </select>
       </div>
-      <div className={styles.serverList}>
-        <h2>Your Servers</h2>
-        {decryptedServers.map(server => (
-          <div key={server.id} className={styles.serverCard}>
-            <div className={styles.serverInfo}>
-              <h3>{server.name}</h3>
-              <p className={server.status === 'Online' ? styles.statusOnline : styles.statusOffline}>
-                {server.status}
-              </p>
-            </div>
-            <div className={styles.serverResources}>
-              <div className={styles.resource}>
-                <label>CPU</label>
-                <div className={styles.progressBar}>
-                  <div className={styles.progressFill} style={{width: `${server.cpu}%`}}></div>
-                </div>
-                <span>{server.cpu}%</span>
-              </div>
-              <div className={styles.resource}>
-                <label>RAM</label>
-                <div className={styles.progressBar}>
-                  <div className={styles.progressFill} style={{width: `${server.ram}%`}}></div>
-                </div>
-                <span>{server.ram}%</span>
-              </div>
-              <div className={styles.resource}>
-                <label>Storage</label>
-                <div className={styles.progressBar}>
-                  <div className={styles.progressFill} style={{width: `${server.storage}%`}}></div>
-                </div>
-                <span>{server.storage}%</span>
-              </div>
-            </div>
-            <div className={styles.serverActions}>
-              <button onClick={() => toggleServerStatus(server.id)}>
-                {server.status === 'Online' ? 'Stop Server' : 'Start Server'}
-              </button>
-              <button onClick={() => allocateResources(server.id, 'cpu', 10)}>Boost CPU</button>
-              <button onClick={() => allocateResources(server.id, 'ram', 10)}>Increase RAM</button>
-            </div>
+      {selectedServer && (
+        <motion.div 
+          className={styles.serverDetails}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <h2>Server Details</h2>
+          <div className={styles.card}>
+            <p><strong>Name:</strong> {servers.find(s => s.id === selectedServer)?.name}</p>
+            <p><strong>Status:</strong> 
+              <span className={servers.find(s => s.id === selectedServer)?.status === 'Online' ? styles.statusOnline : styles.statusOffline}>
+                {servers.find(s => s.id === selectedServer)?.status}
+              </span>
+            </p>
           </div>
-        ))}
-      </div>
+          <div className={styles.usageChart}>
+            <Line data={chartData} options={chartOptions} />
+          </div>
+        </motion.div>
+      )}
     </div>
   );
 }
